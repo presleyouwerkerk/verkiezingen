@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('candidates', function (Blueprint $table) {
+        Schema::create('voters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name', 100); 
+            $table->string('last_name', 100);
+            $table->date('date_of_birth'); 
+            $table->string('voter_address', 255); 
+            $table->string('region', 100); 
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('candidates');
+        Schema::dropIfExists('voters');
     }
 };
