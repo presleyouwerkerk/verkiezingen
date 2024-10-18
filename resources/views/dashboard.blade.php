@@ -1,18 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-                <div class="p-6">
-                    <a href="{{ route('election_types.index') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-200 disabled:opacity-25 transition">
-                        View Elections
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container mx-auto p-6">
+    <h1 class="text-5xl font-bold mb-6">Elections</h1>
+
+    {{-- Pending Elections Section --}}
+    <h2 class="text-2xl font-semibold mb-4">Pending Elections</h2>
+    @if($pendingElections->isEmpty())
+    <p class="text-gray-500">No pending elections at the moment.</p>
+    @else
+    <ul class="space-y-4">
+        @foreach($pendingElections as $election)
+        <li class="border rounded-lg p-4 bg-blue-50">
+            <strong class="text-lg">{{ $election->name }}</strong>Type: {{ $election->electionType->name }}
+            <br>Description: {{ $election->electionType->description ?? 'No description available' }}
+            <br>Status: <span class="text-blue-600">{{ ucfirst($election->status) }}</span>
+            <br>Starts: {{ $election->start_date->format('Y-m-d H:i') }}
+            <br>Ends: {{ $election->end_date->format('Y-m-d H:i') }}
+        </li>
+        @endforeach
+    </ul>
+    @endif
+
+    {{-- Upcoming Elections Section --}}
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Upcoming Elections</h2>
+    @if($upcomingElections->isEmpty())
+    <p class="text-gray-500">No upcoming elections at the moment.</p>
+    @else
+    <ul class="space-y-4">
+        @foreach($upcomingElections as $election)
+        <li class="border rounded-lg p-4 bg-yellow-50">
+            <strong class="text-lg">{{ $election->name }}</strong>Type: {{ $election->electionType->name }}
+            <br>Description: {{ $election->electionType->description ?? 'No description available' }}
+            <br>Status: <span class="text-yellow-600">{{ ucfirst($election->status) }}</span>
+            <br>{{ $election->start_date->format('Y-m-d H:i') }} {{ $election->end_date->format('Y-m-d H:i') }}
+        </li>
+        @endforeach
+    </ul>
+    @endif
+
+    {{-- Finished Elections Section --}}
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Finished Elections</h2>
+    @if($finishedElections->isEmpty())
+    <p class="text-gray-500">No finished elections at the moment.</p>
+    @else
+    <ul class="space-y-4">
+        @foreach($finishedElections as $election)
+        <li class="border rounded-lg p-4 bg-gray-50">
+            <strong class="text-lg">{{ $election->name }}</strong>Type: {{ $election->electionType->name }}
+            <br>Description: {{ $election->electionType->description ?? 'No description available' }}
+            <br>Status: <span class="text-gray-600">{{ ucfirst($election->status) }}</span>
+            <br>Starts: {{ $election->start_date->format('Y-m-d H:i') }}
+            <br>Ends: {{ $election->end_date->format('Y-m-d H:i') }}
+        </li>
+        @endforeach
+    </ul>
+    @endif
+</div>
 @endsection

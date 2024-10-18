@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('elections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('election_type_id')->constrained('election_types'); 
-            $table->dateTime('date'); 
-            $table->string('region', 100)->nullable(); 
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->timestamps();
         });
     }

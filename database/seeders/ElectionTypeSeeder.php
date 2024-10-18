@@ -14,11 +14,11 @@ class ElectionTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('election_types')->insert([
-            ['name' => 'Provinciaal', 'description' => 'Provincial elections'],
-            ['name' => 'Tweede Kamer', 'description' => 'National parliamentary elections'],
-            ['name' => 'Waterschap', 'description' => 'Water management elections'],
-            ['name' => 'Gemeente', 'description' => 'Municipal elections'],
-            ['name' => 'Referendum', 'description' => 'Referendum on specific issues'],
+            ['name' => 'Landelijk', 'description' => 'Nationale parlementaire verkiezingen'],
+            ['name' => 'Provinciaal', 'description' => 'Verkiezingen per provincie'],
+            ['name' => 'Waterschap', 'description' => 'Beheer van wateren en dijken'],
+            ['name' => 'Gemeentelijk', 'description' => 'Lokale gemeenteraadsverkiezingen'],
+            ['name' => 'Referendum', 'description' => 'Stemming over specifieke kwestie'],
         ]);
     }
 }

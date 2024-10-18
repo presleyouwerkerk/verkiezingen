@@ -2,25 +2,22 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ElectionTypeController;
+use App\Http\Controllers\Admin\ElectionController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/election-types', [ElectionTypeController::class, 'index'])->name('election_types.index');
-    
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::middleware(['ministry'])->group(function () {
-        Route::get('/election-types/create', [ElectionTypeController::class, 'create'])->name('election_types.create'); 
-        Route::post('/election-types', [ElectionTypeController::class, 'store'])->name('election_types.store');
-    });
+Route::middleware(['auth', 'admin'])->prefix('admin')->as('admin.')->group(function () {
+    Route::get('panel', function() {
+        return view('admin.admin_panel');
+    })->name('admin_panel');
+
+    Route::resource('elections', ElectionController::class);
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +25,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
