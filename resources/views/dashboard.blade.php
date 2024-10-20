@@ -9,14 +9,28 @@
     @if($pendingElections->isEmpty())
     <p class="text-gray-500">No pending elections at the moment.</p>
     @else
-    <ul class="space-y-4">
+    <ul class="space-y-6">
         @foreach($pendingElections as $election)
-        <li class="border rounded-lg p-4 bg-blue-50">
-            <strong class="text-lg">{{ $election->name }}</strong>Type: {{ $election->electionType->name }}
-            <br>Description: {{ $election->electionType->description ?? 'No description available' }}
-            <br>Status: <span class="text-blue-600">{{ ucfirst($election->status) }}</span>
-            <br>Starts: {{ $election->start_date->format('Y-m-d H:i') }}
-            <br>Ends: {{ $election->end_date->format('Y-m-d H:i') }}
+        <li class="border rounded-lg p-6 bg-white text-black">
+            <!-- Election Type -->
+            <div class="text-2xl font-bold">
+                {{ $election->electionType->name }}
+            </div>
+
+            <!-- Description -->
+            <div class="mt-2 text-gray-600">
+                {{ $election->electionType->description ?? 'No description available' }}
+            </div>
+
+            <!-- Status -->
+            <div class="mt-4 text-blue-600 font-medium">
+                {{ ucfirst($election->status) }}
+            </div>
+
+            <!-- Date -->
+            <div class="mt-2 text-gray-800">
+                {{ $election->start_date->format('F j, Y, g:i A') }} - {{ $election->end_date->format('F j, Y, g:i A') }}
+            </div>
         </li>
         @endforeach
     </ul>
@@ -27,13 +41,28 @@
     @if($upcomingElections->isEmpty())
     <p class="text-gray-500">No upcoming elections at the moment.</p>
     @else
-    <ul class="space-y-4">
+    <ul class="space-y-6">
         @foreach($upcomingElections as $election)
-        <li class="border rounded-lg p-4 bg-yellow-50">
-            <strong class="text-lg">{{ $election->name }}</strong>Type: {{ $election->electionType->name }}
-            <br>Description: {{ $election->electionType->description ?? 'No description available' }}
-            <br>Status: <span class="text-yellow-600">{{ ucfirst($election->status) }}</span>
-            <br>{{ $election->start_date->format('Y-m-d H:i') }} {{ $election->end_date->format('Y-m-d H:i') }}
+        <li class="border rounded-lg p-6 bg-white text-black">
+            <!-- Election Type -->
+            <div class="text-2xl font-bold">
+                {{ $election->electionType->name }}
+            </div>
+
+            <!-- Description -->
+            <div class="mt-2 text-gray-600">
+                {{ $election->electionType->description ?? 'No description available' }}
+            </div>
+
+            <!-- Status -->
+            <div class="mt-4 text-yellow-600 font-medium">
+                {{ ucfirst($election->status) }}
+            </div>
+
+            <!-- Date -->
+            <div class="mt-2 text-gray-800">
+                {{ $election->start_date->format('F j, Y, g:i A') }} - {{ $election->end_date->format('F j, Y, g:i A') }}
+            </div>
         </li>
         @endforeach
     </ul>
@@ -44,14 +73,28 @@
     @if($finishedElections->isEmpty())
     <p class="text-gray-500">No finished elections at the moment.</p>
     @else
-    <ul class="space-y-4">
+    <ul class="space-y-6">
         @foreach($finishedElections as $election)
-        <li class="border rounded-lg p-4 bg-gray-50">
-            <strong class="text-lg">{{ $election->name }}</strong>Type: {{ $election->electionType->name }}
-            <br>Description: {{ $election->electionType->description ?? 'No description available' }}
-            <br>Status: <span class="text-gray-600">{{ ucfirst($election->status) }}</span>
-            <br>Starts: {{ $election->start_date->format('Y-m-d H:i') }}
-            <br>Ends: {{ $election->end_date->format('Y-m-d H:i') }}
+        <li class="border rounded-lg p-6 bg-white text-black">
+            <!-- Election Type -->
+            <div class="text-2xl font-bold">
+                {{ $election->electionType->name }}
+            </div>
+
+            <!-- Description -->
+            <div class="mt-2 text-gray-600">
+                {{ $election->electionType->description ?? 'No description available' }}
+            </div>
+
+            <!-- Status -->
+            <div class="mt-4 text-gray-600 font-medium">
+                {{ ucfirst($election->status) }}
+            </div>
+
+            <!-- Date -->
+            <div class="mt-2 text-gray-800">
+                {{ $election->start_date->format('F j, Y, g:i A') }} - {{ $election->end_date->format('F j, Y, g:i A') }}
+            </div>
         </li>
         @endforeach
     </ul>

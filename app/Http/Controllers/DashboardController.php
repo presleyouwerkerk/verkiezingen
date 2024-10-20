@@ -12,16 +12,11 @@ class DashboardController extends Controller
     {
         $now = Carbon::now();
 
-        $pendingElections = Election::where('start_date', '<=', $now)
-            ->where('end_date', '>=', $now)
-            ->get();
+        $pendingElections = Election::where('start_date', '<=', $now)->where('end_date', '>=', $now)->get();
 
-        $upcomingElections = Election::where('start_date', '>', $now)
-            ->get();
+        $upcomingElections = Election::where('start_date', '>', $now)->get();
 
-        $finishedElections = Election::where('end_date', '<', $now)
-            ->orderBy('end_date', 'desc')
-            ->get();
+        $finishedElections = Election::where('end_date', '<', $now)->orderBy('end_date', 'desc')->get();
 
         if ($finishedElections->count() > 5) {
             $oldestElection = $finishedElections->last();
