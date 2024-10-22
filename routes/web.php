@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Ministry\ElectionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Ministry\PartymanagerController;
+use App\Http\Controllers\Partymanager\PartyController;
+use App\Http\Controllers\Partymanager\CandidateController;
 
 Route::view('/', 'welcome');
 
@@ -22,6 +24,9 @@ Route::middleware(['auth', 'ministry'])->prefix('ministry')->as('ministry.')->gr
 
 Route::middleware(['auth', 'partymanager'])->prefix('partymanager')->as('partymanager.')->group(function () {
     Route::view('panel', 'partymanager.panel')->name('panel');
+    
+    Route::resource('parties', PartyController::class);
+    Route::resource('candidates', CandidateController::class);
 });
 
 Route::middleware('auth')->group(function () {

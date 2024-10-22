@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('party_candidates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('candidate_id')->constrained('candidates');
-            $table->foreignId('party_id')->constrained('political_parties'); 
+            $table->foreignId('party_id')->constrained('parties'); 
             $table->foreignId('election_type_id')->constrained('election_types'); 
             $table->integer('position');
             $table->timestamps();
