@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Ministry;
 
 use App\Http\Controllers\Controller;
 use App\Models\Election;
@@ -12,13 +12,13 @@ class ElectionController extends Controller
     public function index()
     {
         $elections = Election::with('electionType')->get();
-        return view('admin.elections.index', compact('elections'));
+        return view('ministry.elections.index', compact('elections'));
     }
 
     public function create()
     {
         $electionTypes = ElectionType::all();
-        return view('admin.elections.create', compact('electionTypes'));
+        return view('ministry.elections.create', compact('electionTypes'));
     }
 
     public function store(Request $request)
@@ -31,13 +31,13 @@ class ElectionController extends Controller
 
         Election::create($validated);
 
-        return redirect()->route('admin.elections.index')->with('success', 'Election created successfully.');
+        return redirect()->route('ministry.elections.index')->with('success', 'Election created successfully.');
     }
 
     public function edit(Election $election)
     {
         $electionTypes = ElectionType::all();
-        return view('admin.elections.edit', compact('election', 'electionTypes'));
+        return view('ministry.elections.edit', compact('election', 'electionTypes'));
     }
 
     public function update(Request $request, Election $election)
@@ -50,13 +50,13 @@ class ElectionController extends Controller
 
         $election->update($validated);
 
-        return redirect()->route('admin.elections.index')->with('success', 'Election updated successfully.');
+        return redirect()->route('ministry.elections.index')->with('success', 'Election updated successfully.');
     }
 
     public function destroy(Election $election)
     {
         $election->delete();
 
-        return redirect()->route('admin.elections.index')->with('success', 'Election canceled successfully.');
+        return redirect()->route('ministry.elections.index')->with('success', 'Election canceled successfully.');
     }
 }

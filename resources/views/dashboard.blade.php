@@ -23,7 +23,7 @@
             </div>
 
             <!-- Status -->
-            <div class="mt-4 text-blue-600 font-medium">
+            <div class="mt-4 text-yellow-600 font-medium">
                 {{ ucfirst($election->status) }}
             </div>
 
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Status -->
-            <div class="mt-4 text-yellow-600 font-medium">
+            <div class="mt-4 text-blue-600 font-medium">
                 {{ ucfirst($election->status) }}
             </div>
 
@@ -87,7 +87,7 @@
             </div>
 
             <!-- Status -->
-            <div class="mt-4 text-gray-600 font-medium">
+            <div class="mt-4 text-green-600 font-medium">
                 {{ ucfirst($election->status) }}
             </div>
 

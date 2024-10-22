@@ -6,7 +6,7 @@
     <h1 class="text-5xl font-bold mb-6">Elections</h1>
 
     <!-- Create Election Button -->
-    <a href="{{ route('admin.elections.create') }}" class="inline-block mb-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+    <a href="{{ route('ministry.elections.create') }}" class="inline-block mb-6 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
         Make Election
     </a>
 
@@ -28,11 +28,18 @@
                         <td class="py-3 px-4">{{ $election->start_date->format('F j, Y, g:i A') }}</td>
                         <td class="py-3 px-4">{{ $election->end_date->format('F j, Y, g:i A') }}</td>
                         <td class="py-3 px-4">
-                            <a href="{{ route('admin.elections.edit', $election->id) }}" class="text-yellow-600 hover:text-yellow-800 font-semibold mr-4">Edit</a>
-                            <form action="{{ route('admin.elections.destroy', $election->id) }}" method="POST" style="display:inline-block;">
+                            <!-- Edit Button -->
+                            <a href="{{ route('ministry.elections.edit', $election->id) }}" class="inline-block px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition duration-300 font-semibold mr-4">
+                                Edit
+                            </a>
+
+                            <!-- Cancel Button -->
+                            <form action="{{ route('ministry.elections.destroy', $election->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-800 font-semibold">Cancel</button>
+                                <button type="submit" class="inline-block px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300 font-semibold">
+                                    Cancel
+                                </button>
                             </form>
                         </td>
                     </tr>

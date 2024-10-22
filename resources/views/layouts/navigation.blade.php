@@ -16,9 +16,15 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if(auth()->check() && auth()->user()->role === 'admin')
-                    <x-nav-link :href="route('admin.admin_panel')" :active="request()->routeIs('admin.admin_panel')">
-                        {{ __('Admin Panel') }}
+                    @if(auth()->check() && auth()->user()->role === 'ministry')
+                    <x-nav-link :href="route('ministry.panel')" :active="request()->routeIs('ministry.panel')">
+                        {{ __('Ministry Panel') }}
+                    </x-nav-link>
+                    @endif
+
+                    @if(auth()->check() && auth()->user()->role === 'partymanager')
+                    <x-nav-link :href="route('partymanager.panel')" :active="request()->routeIs('partymanager.panel')">
+                        {{ __('Partymanager Panel') }}
                     </x-nav-link>
                     @endif
                 </div>

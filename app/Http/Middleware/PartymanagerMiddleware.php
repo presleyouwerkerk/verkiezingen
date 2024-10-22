@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class PartymanagerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'admin') {
+         if (Auth::check() && Auth::user()->role === 'partymanager') {
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'You do not have admin access.');
+        return redirect('dashboard')->with('error', 'You do not have partymanager access.');
     }
 }

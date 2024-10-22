@@ -6,7 +6,7 @@
     <h1 class="text-5xl font-bold mb-6">Edit Election</h1>
 
     <!-- Edit Election Form -->
-    <form action="{{ route('admin.elections.update', $election->id) }}" method="POST" class="space-y-6">
+    <form action="{{ route('ministry.elections.update', $election->id) }}" method="POST" class="space-y-6">
         @csrf
         @method('PATCH') <!-- Using PATCH for updating the election -->
 
