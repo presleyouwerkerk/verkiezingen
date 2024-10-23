@@ -55,6 +55,9 @@ class ElectionController extends Controller
 
     public function destroy(Election $election)
     {
+        $election->parties()->detach();
+        $election->candidates()->detach();
+
         $election->delete();
 
         return redirect()->route('ministry.elections.index')->with('success', 'Election canceled successfully.');

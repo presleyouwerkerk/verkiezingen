@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Partymanager;
 
 use App\Models\Party;
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,14 +12,14 @@ class PartyController extends Controller
 {
     public function index()
     {
-        $parties = Party::all();
+        $parties = Party::where('user_id', auth()->id())->get();
         return view('partymanager.parties.index', compact('parties'));
     }
 
     public function create()
     {
         if (Auth::user()->party) {
-            return redirect()->route('partymanager.parties.index')->with('error', 'You already have a party and cannot create another.');
+            return redirect()->route('partymanager.parties.index')->with('error', 'You already have a party.');
         }
 
         return view('partymanager.parties.create');
@@ -27,7 +28,7 @@ class PartyController extends Controller
     public function store(Request $request)
     {
         if (Auth::user()->party) {
-            return redirect()->route('partymanager.parties.index')->with('error', 'You already have a party and cannot create another.');
+            return redirect()->route('partymanager.parties.index')->with('error', 'You already have a party.');
         }
 
         $request->validate([
@@ -46,11 +47,19 @@ class PartyController extends Controller
 
     public function edit(Party $party)
     {
+        if ($party->user_id !== auth()->id()) {
+            return redirect()->route('partymanager.parties.index')->with('error', 'You are not authorized to edit this party.');
+        }
+
         return view('partymanager.parties.edit', compact('party'));
     }
 
     public function update(Request $request, Party $party)
     {
+        if ($party->user_id !== auth()->id()) {
+            return redirect()->route('partymanager.parties.index')->with('error', 'You are not authorized to update this party.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -63,7 +72,17 @@ class PartyController extends Controller
 
     public function destroy(Party $party)
     {
+        if ($party->user_id !== auth()->id()) {
+            return redirect()->route('partymanager.parties.index')->with('error', 'You are not authorized to delete this party.');
+        }
+
+        $candidateIds = $party->candidates->pluck('id')->toArray();
+        $party->candidates()->detach();
+
+        Candidate::whereIn('id', $candidateIds)->delete();
+
         $party->delete();
-        return redirect()->route('partymanager.parties.index')->with('success', 'Party deleted successfully.');
+
+        return redirect()->route('partymanager.parties.index')->with('success', 'Party and its candidates deleted successfully.');
     }
 }

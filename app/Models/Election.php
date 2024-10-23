@@ -30,9 +30,19 @@ class Election extends Model
             return 'pending';
         }
     }
-    
+
     public function electionType()
     {
         return $this->belongsTo(ElectionType::class);
+    }
+
+    public function parties()
+    {
+        return $this->belongsToMany(Party::class, 'election_party')->withTimestamps();
+    }
+    
+    public function candidates()
+    {
+        return $this->belongsToMany(Candidate::class, 'election_candidates')->withTimestamps();
     }
 }

@@ -28,6 +28,11 @@
                         <td class="py-3 px-4">{{ $election->start_date->format('F j, Y, g:i A') }}</td>
                         <td class="py-3 px-4">{{ $election->end_date->format('F j, Y, g:i A') }}</td>
                         <td class="py-3 px-4">
+                            <!-- Candidates Button -->
+                            <a href="{{ route('ministry.elections.show-parties', $election->id) }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 font-semibold mr-4">
+                                Candidates
+                            </a>
+
                             <!-- Edit Button -->
                             <a href="{{ route('ministry.elections.edit', $election->id) }}" class="inline-block px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition duration-300 font-semibold mr-4">
                                 Edit

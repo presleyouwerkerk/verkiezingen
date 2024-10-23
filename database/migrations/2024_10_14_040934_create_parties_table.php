@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('parties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name', 100);
-            $table->text('description');
-            $table->boolean('approval_status')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
