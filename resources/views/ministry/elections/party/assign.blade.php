@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto p-6">
     <!-- Title -->
-    <h1 class="text-5xl font-bold mb-6">Assign Parties to {{ $election->electionType->name }}</h1>
+    <h1 class="text-5xl font-bold mb-6">Assign Parties to Election</h1>
 
     <!-- List of Parties -->
     <div class="overflow-x-auto">

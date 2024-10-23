@@ -21,4 +21,9 @@ class Candidate extends Model
             ->withPivot('position', 'election_type_id')
             ->withTimestamps();
     }
+
+    public function elections()
+    {
+        return $this->belongsToMany(Election::class, 'election_candidates')->withTimestamps();
+    }
 }
